@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Roadmap | Master Infrastructure & Deployment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --accent-blue: #00d2ff;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-purple: #9d50bb;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- FUTURISTIC ANIMATED BACKGROUND --- */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0a0c 100%);
+        }
+
+        .stars {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: moveStars 100s linear infinite;
+        }
+
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(-2000px); }
+        }
+
+        .glow {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, var(--accent-blue), transparent 70%);
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20%, 10%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            margin: 10px 0;
+        }
+
+        .hero .subtitle {
+            font-style: italic;
+            color: var(--accent-orange);
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        /* Roadmap Timeline */
+        .roadmap {
+            display: grid;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .level {
+            position: relative;
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .level-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .level-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .level-description {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* Skills Grid */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-8px) scale(1.03);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card h3 {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .skill-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+        }
+
+        .card.beginner { border-color: rgba(16, 185, 129, 0.3); }
+        .card.beginner:hover { border-color: var(--accent-green); }
+        .card.beginner h3 { color: var(--accent-green); }
+        .card.beginner .skill-dot { background: var(--accent-green); }
+
+        .card.intermediate { border-color: rgba(245, 158, 11, 0.3); }
+        .card.intermediate:hover { border-color: var(--accent-orange); }
+        .card.intermediate h3 { color: var(--accent-orange); }
+        .card.intermediate .skill-dot { background: var(--accent-orange); }
+
+        .card.advanced { border-color: rgba(157, 80, 187, 0.3); }
+        .card.advanced:hover { border-color: var(--accent-purple); }
+        .card.advanced h3 { color: var(--accent-purple); }
+        .card.advanced .skill-dot { background: var(--accent-purple); }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--accent-blue);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            margin-top: 10px;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            margin-top: 60px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 210, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-container" id="bg">
+        <div class="glow" style="top: 10%; left: 10%;"></div>
+        <div class="glow" style="bottom: 10%; right: 10%; background: radial-gradient(circle, var(--accent-blue), transparent 70%);"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="hero">
+            <h1>DEVOPS ROADMAP</h1>
+            <p>Master Infrastructure, Automation & Deployment</p>
+            <p class="subtitle">From Foundations to Advanced DevOps Engineering</p>
+        </header>
+
+        <!-- Roadmap Levels -->
+        <main class="roadmap">
+
+            <!-- Level 1: Foundations -->
+            <div class="level">
+                <div class="level-header">
+                    <div class="level-number">01</div>
+                    <div>
+                        <div class="level-title">Foundations</div>
+                        <div class="level-description">Build core knowledge in Linux, networking, and basics</div>
+                    </div>
+                </div>
+                <div class="skills-container">
+                    <div class="card beginner">
+                        <h3>🐧 Linux Mastery</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> Linux Commands & Shell</div>
+                            <div class="skill-item"><span class="skill-dot"></span> File Systems & Permissions</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Process Management</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Package Managers</div>
+                        </div>
+                        <span class="tag">Ubuntu • CentOS • bash</span>
+                    </div>
+                    <div class="card beginner">
+                        <h3>🌐 Networking Basics</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> TCP/IP & DNS</div>
+                            <div class="skill-item"><span class="skill-dot"></span> HTTP/HTTPS Protocols</div>
+                            <div class="skill-item"><span class="skill-dot"></span> SSH & Firewalls</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Load Balancing Concepts</div>
+                        </div>
+                        <span class="tag">networking • security</span>
+                    </div>
+                    <div class="card beginner">
+                        <h3>📦 Version Control</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> Git Fundamentals</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Branching Strategies</div>
+                            <div class="skill-item"><span class="skill-dot"></span> GitHub/GitLab</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Merge Workflows</div>
+                        </div>
+                        <span class="tag">git • GitHub • GitLab</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 2: Intermediate -->
+            <div class="level">
+                <div class="level-header">
+                    <div class="level-number">02</div>
+                    <div>
+                        <div class="level-title">Intermediate</div>
+                        <div class="level-description">Learn containerization, CI/CD, and cloud fundamentals</div>
+                    </div>
+                </div>
+                <div class="skills-container">
+                    <div class="card intermediate">
+                        <h3>🐳 Containerization</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> Docker Fundamentals</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Container Orchestration</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Docker Compose</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Image Optimization</div>
+                        </div>
+                        <span class="tag">Docker • Podman</span>
+                    </div>
+                    <div class="card intermediate">
+                        <h3>⚙️ CI/CD Pipelines</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> Jenkins Basics</div>
+                            <div class="skill-item"><span class="skill-dot"></span> GitHub Actions</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Pipeline Design</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Automated Testing</div>
+                        </div>
+                        <span class="tag">Jenkins • GitLab CI • GitHub Actions</span>
+                    </div>
+                    <div class="card intermediate">
+                        <h3>☁️ Cloud Basics</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> AWS/Azure/GCP Concepts</div>
+                            <div class="skill-item"><span class="skill-dot"></span> VMs & Networking</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Storage & Databases</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Cost Management</div>
+                        </div>
+                        <span class="tag">AWS • Azure • GCP</span>
+                    </div>
+                    <div class="card intermediate">
+                        <h3>📊 Infrastructure as Code</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> Terraform Fundamentals</div>
+                            <div class="skill-item"><span class="skill-dot"></span> CloudFormation</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Ansible Basics</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Configuration Management</div>
+                        </div>
+                        <span class="tag">Terraform • Ansible</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 3: Advanced -->
+            <div class="level">
+                <div class="level-header">
+                    <div class="level-number">03</div>
+                    <div>
+                        <div class="level-title">Advanced</div>
+                        <div class="level-description">Master Kubernetes, monitoring, and production optimization</div>
+                    </div>
+                </div>
+                <div class="skills-container">
+                    <div class="card advanced">
+                        <h3>☸️ Kubernetes Mastery</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> K8s Architecture & Core</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Deployments & Services</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Helm & Package Management</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Cluster Security</div>
+                        </div>
+                        <span class="tag">Kubernetes • Helm • EKS • AKS</span>
+                    </div>
+                    <div class="card advanced">
+                        <h3>📈 Monitoring & Observability</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> Prometheus & Grafana</div>
+                            <div class="skill-item"><span class="skill-dot"></span> ELK Stack Logging</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Distributed Tracing</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Alerting & SLOs</div>
+                        </div>
+                        <span class="tag">Prometheus • Grafana • ELK</span>
+                    </div>
+                    <div class="card advanced">
+                        <h3>🔐 Security & Compliance</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> Secrets Management</div>
+                            <div class="skill-item"><span class="skill-dot"></span> RBAC & IAM</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Network Policies</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Compliance Automation</div>
+                        </div>
+                        <span class="tag">Vault • OPA • HashiCorp</span>
+                    </div>
+                    <div class="card advanced">
+                        <h3>🚀 Advanced IaC & Automation</h3>
+                        <div class="card-content">
+                            <div class="skill-item"><span class="skill-dot"></span> Terraform Modules & State</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Multi-Cloud Strategies</div>
+                            <div class="skill-item"><span class="skill-dot"></span> GitOps & ArgoCD</div>
+                            <div class="skill-item"><span class="skill-dot"></span> Advanced Automation</div>
+                        </div>
+                        <span class="tag">Terraform • ArgoCD • Pulumi</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Start Your DevOps Journey?</h2>
+            <p>Begin with the foundations and progress at your own pace</p>
+            <button class="cta-button">Download Roadmap PDF</button>
+        </section>
+
+    </div>
+
+    <script>
+        // Generate stars dynamically
+        const bg = document.getElementById('bg');
+        const count = 150;
+        for (let i = 0; i < count; i++) {
+            const star = document.createElement('div');
+            star.className = 'stars';
+            const x = Math.random() * 100;
+            const y = Math.random() * 2000;
+            const duration = 50 + Math.random() * 100;
+            star.style.left = `${x}%`;
+            star.style.top = `${y}px`;
+            star.style.animationDuration = `${duration}s`;
+            bg.appendChild(star);
+        }
+
+        // Add subtle parallax to cards
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.card');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            cards.forEach(card => {
+                const speed = 8;
+                card.style.transform = `translate(${(x - 0.5) * speed}px, ${(y - 0.5) * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
