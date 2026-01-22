@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plus App – ชีวิตที่ง่ายขึ้นในแอปเดียว</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Google Font (Thai-friendly) -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white">
+
+<!-- Navbar -->
+<header x-data="{ open: false }" class="container mx-auto px-6 py-6 flex items-center justify-between">
+  <h1 class="text-2xl font-bold">Plus+</h1>
+
+  <button @click="open = !open" class="md:hidden">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <nav class="hidden md:flex space-x-8">
+    <a href="#features" class="hover:text-pink-200">ฟีเจอร์</a>
+    <a href="#benefits" class="hover:text-pink-200">ประโยชน์</a>
+    <a href="#download" class="hover:text-pink-200">ดาวน์โหลด</a>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div x-show="open" @click.outside="open=false"
+       class="absolute top-20 left-6 right-6 bg-white text-gray-800 rounded-xl shadow-lg p-6 md:hidden">
+    <a href="#features" class="block py-2">ฟีเจอร์</a>
+    <a href="#benefits" class="block py-2">ประโยชน์</a>
+    <a href="#download" class="block py-2">ดาวน์โหลด</a>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="container mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+  <div>
+    <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+      ชีวิตง่ายขึ้น<br>
+      <span class="text-pink-200">ด้วย Plus App</span>
+    </h2>
+    <p class="text-lg text-white/90 mb-8">
+      แอปเดียวที่รวมทุกสิ่งที่คุณต้องการ  
+      สะสมแต้ม รับสิทธิพิเศษ จัดการทุกอย่างได้ในที่เดียว
+    </p>
+
+    <div class="flex flex-wrap gap-4">
+      <a href="#download"
+         class="bg-white text-indigo-700 px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition">
+        เริ่มใช้งานฟรี
+      </a>
+      <a href="#features"
+         class="border border-white/50 px-8 py-3 rounded-full hover:bg-white/10 transition">
+        ดูรายละเอียด
+      </a>
+    </div>
+  </div>
+
+  <div class="relative">
+    <div class="absolute inset-0 bg-white/20 blur-3xl rounded-full"></div>
+    <img src="https://dummyimage.com/500x600/ffffff/000000&text=Plus+App+Preview"
+         alt="Plus App"
+         class="relative rounded-3xl shadow-2xl mx-auto">
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="bg-white text-gray-800 py-20">
+  <div class="container mx-auto px-6">
+    <h3 class="text-3xl font-bold text-center mb-12">ฟีเจอร์เด่น</h3>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-50 p-8 rounded-2xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-3">สะสมแต้มอัตโนมัติ</h4>
+        <p>ทุกการใช้งานมีค่า สะสมแต้มได้ง่าย ไม่ต้องพกบัตร</p>
+      </div>
+
+      <div class="bg-gray-50 p-8 rounded-2xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-3">สิทธิพิเศษเฉพาะคุณ</h4>
+        <p>รับโปรโมชันและดีลพิเศษที่ออกแบบมาเพื่อคุณโดยเฉพาะ</p>
+      </div>
+
+      <div class="bg-gray-50 p-8 rounded-2xl shadow hover:shadow-lg transition">
+        <h4 class="text-xl font-semibold mb-3">ปลอดภัย มั่นใจได้</h4>
+        <p>มาตรฐานความปลอดภัยระดับสากล ข้อมูลของคุณได้รับการปกป้อง</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section id="benefits" class="py-20">
+  <div class="container mx-auto px-6 text-center">
+    <h3 class="text-3xl font-bold mb-8">ทำไมต้อง Plus App?</h3>
+    <p class="max-w-2xl mx-auto text-white/90 mb-12">
+      เพราะเราเชื่อว่าเทคโนโลยีควรช่วยให้ชีวิตของคุณสะดวกขึ้น ไม่ซับซ้อน
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white/10 backdrop-blur p-6 rounded-xl">
+        ใช้งานง่ายสำหรับทุกวัย
+      </div>
+      <div class="bg-white/10 backdrop-blur p-6 rounded-xl">
+        รองรับภาษาไทย 100%
+      </div>
+      <div class="bg-white/10 backdrop-blur p-6 rounded-xl">
+        ทีมซัพพอร์ตคนไทย
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Download CTA -->
+<section id="download" class="bg-white text-gray-800 py-20">
+  <div class="container mx-auto px-6 text-center">
+    <h3 class="text-3xl font-bold mb-6">พร้อมเริ่มแล้วหรือยัง?</h3>
+    <p class="mb-8">ดาวน์โหลด Plus App วันนี้ และเริ่มใช้ชีวิตที่ง่ายขึ้น</p>
+
+    <div class="flex justify-center gap-4 flex-wrap">
+      <button class="bg-indigo-600 text-white px-8 py-3 rounded-full hover:bg-indigo-700 transition">
+        App Store
+      </button>
+      <button class="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-gray-800 transition">
+        Google Play
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-8 text-center text-white/70">
+  © 2026 Plus App. สงวนลิขสิทธิ์
+</footer>
+
+</body>
+</html>
